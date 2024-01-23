@@ -1,13 +1,19 @@
 import datetime
 
 
-date1 = input("Введіть дату у форматі yyyy-mm-dd: ")
+date1 = input("Enter the date in the format yyyy-mm-dd: ")
+now = datetime.datetime.today()
+date1_now = now.strftime("%Y-%m-%d")
+while True:
+    try:
+        date_input = datetime.datetime.strptime(date1, "%Y-%m-%d")
+        break
 
-try:
-    date_input = datetime.datetime.strptime(date1, "%Y-%m-%d")
+    except ValueError:
+        print("The date must be in the format yyyy-mm-dd")
+        date1 = input("Enter the date in the format yyyy-mm-dd: ")
 
-except Exception:
-    print("Помилка: дата має бути у форматі yyyy-mm-dd")
+
 
 
 def get_days_from_today(date):
@@ -18,4 +24,4 @@ def get_days_from_today(date):
         difference_time = -(date_input - date_now)
     return difference_time.days
     
-print(get_days_from_today(date_input))
+print(f" The difference of days between {date1} and {date1_now} is equal {get_days_from_today(date_input)} day(s).")
