@@ -1,3 +1,4 @@
+# Створіть функцію get_days_from_today(date), яка розраховує кількість днів між заданою датою і поточною датою.
 import datetime
 
 
@@ -30,6 +31,10 @@ print(f" The difference of days between {date1} and {date1_now} is equal {get_da
 
 
 
+
+
+# Вам необхідно написати функцію get_numbers_ticket(min, max, quantity), 
+# яка допоможе генерувати набір унікальних випадкових чисел для таких лотерей.
 import random
 
 while True:
@@ -53,23 +58,27 @@ while True:
     except ValueError:
         print("You entered incorrect data. Please enter an integer.")         
         
-        
-        
 while True:
     try:
         quant = int(input("Enter the number of winning numbers: "))
         diff=int(maximal-minimal)
-        if quant>1 and quant<=diff:
+        if quant>=1 and quant<=diff:
             break
         else:
             print(f"You must enter the number of winning numbers between 1 and {diff}. Try again.")
     except ValueError:
         print("You entered incorrect data. Please enter an integer.")
 
+def ticket_data_is_valid(min, max, quantity):
+    return (1 <= min < max <= 1000) and (quantity <= max - min)
 
 def get_numbers_ticket(min, max, quantity):
     lot = range(min, max)
-    quanty = random.sample(lot, quantity)
-    sort_quanty = sorted(quanty) 
-    return sort_quanty
-print(get_numbers_ticket(minimal, maximal, quant))
+    numbers = random.sample(lot, quantity)
+    sorted_numbers = sorted(numbers)
+    return sorted_numbers
+
+if ticket_data_is_valid(minimal, maximal, quant):
+    print(get_numbers_ticket(minimal, maximal, quant))
+else:
+    print("Ticket details are incorrect.")
