@@ -1,4 +1,5 @@
-# Створіть функцію get_days_from_today(date), яка розраховує кількість днів між заданою датою і поточною датою.
+# # Створіть функцію get_days_from_today(date), яка розраховує кількість днів між заданою датою і поточною датою.
+
 import datetime
 
 
@@ -33,8 +34,10 @@ print(f" The difference of days between {date1} and {date1_now} is equal {get_da
 
 
 
-# Вам необхідно написати функцію get_numbers_ticket(min, max, quantity), 
-# яка допоможе генерувати набір унікальних випадкових чисел для таких лотерей.
+
+# # Вам необхідно написати функцію get_numbers_ticket(min, max, quantity), 
+# # яка допоможе генерувати набір унікальних випадкових чисел для таких лотерей.
+
 import random
 
 while True:
@@ -82,3 +85,88 @@ if ticket_data_is_valid(minimal, maximal, quant):
     print(get_numbers_ticket(minimal, maximal, quant))
 else:
     print("Ticket details are incorrect.")
+
+
+
+
+
+
+# Функція, яка автоматично нормалізує номери телефонів до потрібного формату, 
+# видаляючи всі зайві символи та додаючи міжнародний код країни, якщо потрібно.
+
+import re
+
+raw_numbers = [
+    "067\\t123 4567",
+    "(095) 234-5678\\n",
+    "+380 44 123 4567",
+    "380501234567",
+    "    +38(050)123-32-34",
+    "     0503451234",
+    "(050)8889900",
+    "38050-111-22-22",
+    "38050 111 22 11   ",
+]
+
+def normalize_phone(phone_number):
+    phone_number = re.sub(r"[^\d+]", "", phone_number)
+    return phone_number
+
+def add_ua_code(code):       
+    if code.startswith("+38"):
+        return code
+    elif code.startswith("8"):
+        return "+3" + code
+    elif code.startswith("38"):
+        return "+" + code
+    else:
+        return "+38" + code
+
+sanitized_numbers = [add_ua_code(normalize_phone(num)) for num in raw_numbers]
+print("Нормалізовані номери телефонів для SMS-розсилки:", sanitized_numbers)
+
+
+
+
+
+# Створити функцію get_upcoming_birthdays, яка допоможе вам визначати, кого з колег потрібно привітати з днем народження!
+
+
+import datetime
+from datetime import date
+import calendar
+
+users = [
+    {"name": "John Doe", "birthday": "1985.01.23"},
+    {"name": "Jane Smith", "birthday": "1990.01.27"},
+    {"name": "Jay Lo", "birthday": "1986.01.25"},
+    {"name": "Penelopa Crus", "birthday": "1989.01.29"}
+]
+
+def get_upcoming_birthdays(users=None):
+    tday=datetime.datetime.today().date()
+    birthdays=[]
+    
+    for user in users:
+        bday = datetime.datetime.strptime(user["birthday"], "%Y.%m.%d").date()
+        bday = bday.replace(year=tday.year)
+        
+        if bday < tday:
+            bday = bday.replace(year=tday.year + 1)
+            
+        day_of_week = calendar.day_name[bday.weekday()]
+        
+        if day_of_week == "Saturday":
+            bday = bday + datetime.timedelta(days=2)
+        elif day_of_week == "Sunday":
+            bday = bday + datetime.timedelta(days=1)
+        
+        days_between=(bday-tday).days
+        
+        if 0<=days_between<7:
+            birthdays.append({'name':user['name'], 'birthday':bday.strftime("%Y.%m.%d")}) 
+
+    return birthdays
+            
+upcoming_birthdays = get_upcoming_birthdays(users)
+print("Список привітань на цьому тижні:", upcoming_birthdays)
