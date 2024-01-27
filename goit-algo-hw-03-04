@@ -15,7 +15,6 @@ users = [
 def get_upcoming_birthdays(users=None):
     tday=datetime.datetime.today().date()
     birthdays=[]
-    
     for user in users:
         bday = datetime.datetime.strptime(user["birthday"], "%Y.%m.%d").date()
         bday = bday.replace(year=tday.year)
@@ -24,16 +23,19 @@ def get_upcoming_birthdays(users=None):
             bday = bday.replace(year=tday.year + 1)
             
         day_of_week = calendar.day_name[bday.weekday()]
+        congratulation_date = bday
         
         if day_of_week == "Saturday":
-            bday = bday + datetime.timedelta(days=2)
+            congratulation_date = bday + datetime.timedelta(days=2)
         elif day_of_week == "Sunday":
-            bday = bday + datetime.timedelta(days=1)
+            congratulation_date = bday + datetime.timedelta(days=1)
         
         days_between=(bday-tday).days
-        
+        congratulation_date_between=(congratulation_date-tday).days
         if 0<=days_between<7:
             birthdays.append({'name':user['name'], 'birthday':bday.strftime("%Y.%m.%d")}) 
+        elif 0<=congratulation_date_between<7:
+            birthdays.append({'name':user['name'], 'birthday':bday.strftime("%Y.%m.%d")})
 
     return birthdays
             
