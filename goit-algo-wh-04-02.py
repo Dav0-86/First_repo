@@ -16,11 +16,14 @@ except Exception as error:
 outlist = []
 
 def get_cats_info(path):
-    with open("D:\\cats_file.txt", "r", encoding="utf-8") as file:
-        for split in text.split("\n"):
-            split = split.split(",")
-            outlist.append({'id': split[0], 'name': split[1], 'age': split[2]})
-        return outlist
+    try:
+        with open("D:\\cats_file.txt", "r", encoding="utf-8") as file:
+            for split in text.split("\n"):
+                split = split.split(",")
+                outlist.append({'id': split[0], 'name': split[1], 'age': split[2]})
+            return outlist
+    except Exception as error:
+        print(f"Виникла помилка --> {error}")
 
 
 
