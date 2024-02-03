@@ -5,9 +5,13 @@ text = '''60b90c1c13067a15887e1ae1,Tayson,3
 60b90c3b13067a15887e1ae4,Simon,12
 60b90c4613067a15887e1ae5,Tessi,5'''
 
-
-with open("D:\\cats_file.txt", "w", encoding="utf-8") as file:
+try: 
+    with open("D:\\cats_file.txt", "w", encoding="utf-8") as file:
     file.write(text) 
+
+except Exception as error:
+    print(f"Файл не відкрився правильно, помилка --> {error}")
+
 
 outlist = []
 
