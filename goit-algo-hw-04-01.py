@@ -1,11 +1,14 @@
-
-
 text = '''Alex Korp,3000
 Nikita Borisenko,2000
 Sitarama Raju,1000'''
 
-with open("D:\\Oplata_truda.txt", "w", encoding="utf-8") as file:
-    file.write(text)
+
+try: 
+    with open("D:\\Oplata_truda.txt", "w", encoding="utf-8") as file:
+        file.write(text)
+
+except Exception as error:
+    print(f"Файл не відкрився правильно, помилка --> {error}")
 
 def total_salary(path):
     total_cash = 0
