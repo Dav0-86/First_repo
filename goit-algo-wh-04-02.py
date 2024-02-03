@@ -7,7 +7,7 @@ text = '''60b90c1c13067a15887e1ae1,Tayson,3
 
 try: 
     with open("D:\\cats_file.txt", "w", encoding="utf-8") as file:
-    file.write(text) 
+        file.write(text) 
 
 except Exception as error:
     print(f"Файл не відкрився правильно, помилка --> {error}")
