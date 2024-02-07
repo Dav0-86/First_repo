@@ -1,3 +1,5 @@
+from collections import deque
+
 def input_error(func):
     def inner(*args, **kwargs):
         try:
@@ -67,7 +69,7 @@ def show_all(*args):
 
 def main():
     contacts = {}
-    user_inputs = []
+    user_inputs = deque(maxlen=100)
     print("Welcome to the assistant bot!")
     while True:
         user_input = input("Enter a command: ")
