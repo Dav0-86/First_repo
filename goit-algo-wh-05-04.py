@@ -67,24 +67,29 @@ def show_all(*args):
 
 def main():
     contacts = {}
+    user_inputs = []
     print("Welcome to the assistant bot!")
     while True:
         user_input = input("Enter a command: ")
+        user_inputs.append(user_input)
         command, *args = parse_input(user_input)
 
         if command in ["close", "exit"]:
             print("Good bye!")
+            print(f"Log of all your entered data >>> {user_inputs}")
             break
         elif command == "hello":
             print("How can I help you?")
         elif command == "add":
             print(add_contact(args, contacts))
         elif command == "change":
-                print(change_contact(args, contacts))
+            print(change_contact(args, contacts))
         elif command == "phone":
-                print(show_phone(args, contacts))
-        elif command == "show_all" or "all":
-                print(show_all(contacts))    
+            print(show_phone(args, contacts))
+        elif command == "show_all":
+            print(show_all(contacts)) 
+        elif command == "all":
+            print(show_all(contacts))    
         else:
             print("Invalid command.")
 
