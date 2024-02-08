@@ -15,23 +15,23 @@ def parse_log_line(line: str) -> dict:
         "level": level,
         "message": message
     }
+
     return log
 
 
 def load_logs(file_path: str) -> list:
     logs = []
     with open(file_path, "r") as file:
-        for line in file:
-            log = parse_log_line(line)
-            logs.append(log)
+        logs = map(parse_log_line, file)
+        logs = list(logs)
+
     return logs
 
 
 def filter_logs_by_level(logs: list, level: str) -> list:
-    filtered_logs = []
-    for log in logs: 
-        if log["level"] == level:
-            filtered_logs.append(log)
+    filtered_logs = filter(lambda log: log["level"] == level, logs)
+    filtered_logs = list(filtered_logs)
+
     return filtered_logs
 
 
@@ -43,6 +43,7 @@ def count_logs_by_level(logs: list) -> dict:
             counts[level] += 1
         else:
             counts[level] = 1
+
     return counts
 
 
