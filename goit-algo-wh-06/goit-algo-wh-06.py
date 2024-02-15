@@ -1,5 +1,4 @@
-from collections import UserDict
-from collections import UserList
+from collections import UserDict, UserList
 
 class Field:
     def __init__(self, value):
