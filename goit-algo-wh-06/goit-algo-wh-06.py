@@ -1,4 +1,5 @@
 from collections import UserDict
+from collections import UserList
 
 class Field:
     def __init__(self, value):
@@ -42,6 +43,14 @@ class AddressBook(UserDict):
         self.data[name] = phone
 
 
+class MyList(UserList):
+    def add_if_not_exists(self, name):
+        if name not in self.data:
+            self.data.append(name)
+
+
+
+
 if __name__ == "__main__":
 
     book = AddressBook()
@@ -54,4 +63,4 @@ if __name__ == "__main__":
     book.add_record("John", record)
 
     for name, record in book.data.items():
-        print(record, book, name)
+        print(f'Contact {name} : {record}')
