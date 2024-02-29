@@ -169,16 +169,23 @@ def show_all(*args):
     return result
 
 
+# pickle
+def save_data(book, filename="addressbook.pkl"):
+    with open(filename, "wb") as f:
+        pickle.dump(book, f)
+
+def load_data(filename="addressbook.pkl"):
+    try:
+        with open(filename, "rb") as f:
+            return pickle.load(f)
+    except FileNotFoundError:
+        return AddressBook()
+
 
 # main
-try:
-    with open('addressbook.pkl', 'rb') as input_file:
-        book = pickle.load(input_file)
-except FileNotFoundError:
-    book = AddressBook()
-
 def main():
-    book = AddressBook()
+    book = load_data()
+
     user_inputs = deque(maxlen=100)
     print("Welcome to the assistant bot!")
     while True:
@@ -217,8 +224,7 @@ def main():
         else:
             print("Invalid command.")
 
-
+    save_data(book)
 
 if __name__ == "__main__":
-    with open('addressbook.pkl', 'wb') as output:
-        pickle.dump(book, output, pickle.HIGHEST_PROTOCOL)
+    main()
