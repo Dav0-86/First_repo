@@ -172,8 +172,8 @@ def show_all(*args):
 
 # main
 try:
-    with open('addressbook.pkl', 'rb') as input:
-        book = pickle.load(input)
+    with open('addressbook.pkl', 'rb') as input_file:
+        book = pickle.load(input_file)
 except FileNotFoundError:
     book = AddressBook()
 
